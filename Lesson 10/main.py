@@ -160,13 +160,16 @@
 # try:
 #     num1 = int(input("Please enter a number: "))
 #     num2 = int(input("Please enter another number: "))
-#
-#     print(num1 / num2)
 # except ValueError:
 #     print("Please enter a valid number")
 # except ZeroDivisionError:
 #     print("You cannot divide by zero")
 # except Exception as e:
 #     print(e)
+# else:
+#     try:
+#         print(num1 / num2)
+#     except ZeroDivisionError:
+#         print("You cannot divide by zero")
 #
 # print("Hello world")
