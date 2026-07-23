@@ -14,6 +14,10 @@
     <p>Qty: {{ product.quantity }}</p>
     <p>Description: {{ product.description }}</p>
     <p>Category: {{ product.category.name }}</p>
+    <a href="{% url 'store:update_product' product_pk=product.pk %}">Update Product</a>
+    <hr>
+    <a href="{% url 'store:delete_product' product_pk=product.pk %}">Delete Product</a>
+    <hr>
     <a href="{% url 'store:products' %}">Back to Products</a>
 </body>
 </html>

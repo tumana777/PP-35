@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.http import JsonResponse
 from store.models import Product
+from store.forms import AddProductForm
 
 # def index(request):
 #     return HttpResponse("<h1>Hello, world!</h1>")
@@ -36,11 +37,44 @@ def product_detail(request, product_pk):
     return render(request, 'product_detail.html', {'product': product})
 
 
+def add_product(request):
+    if request.method == 'POST':
+
+        # print(request.POST)
+
+        form = AddProductForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('store:products')
+    else:
+        form = AddProductForm()
+
+    return render(request, 'add_product.html', {'form': form})
 
 
+def update_product(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
 
+    if request.method == 'POST':
+        form = AddProductForm(request.POST, instance=product)
 
+        if form.is_valid():
+            form.save()
 
+            return redirect('store:product_detail', product_pk=product_pk)
+
+    form = AddProductForm(instance=product)
+
+    return render(request, 'update_product.html', {'form': form})
+
+def delete_product(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
+
+    product.delete()
+
+    return redirect('store:products')
 
 
 

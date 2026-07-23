@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 # Create your models here.
@@ -23,6 +24,10 @@ class Product(models.Model):
 
     class Meta:
         db_table = 'products'
+
+    # def validate_price(self):
+    #     if self.price <= 0:
+    #         raise ValidationError("Price must be greater than 0.")
 
     def __str__(self):
         return f"{self.category} -> {self.name}"
