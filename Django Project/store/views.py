@@ -46,6 +46,11 @@ def add_product(request):
 
         if form.is_valid():
             form.save()
+            # product = form.save(commit=False)
+            #
+            # product.quantity = 10
+            #
+            # product.save()
 
             return redirect('store:products')
     else:
@@ -72,7 +77,8 @@ def update_product(request, product_pk):
 def delete_product(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
 
-    product.delete()
+    if request.method == 'POST':
+        product.delete()
 
     return redirect('store:products')
 

@@ -16,7 +16,10 @@
     <p>Category: {{ product.category.name }}</p>
     <a href="{% url 'store:update_product' product_pk=product.pk %}">Update Product</a>
     <hr>
-    <a href="{% url 'store:delete_product' product_pk=product.pk %}">Delete Product</a>
+    <form action="{% url 'store:delete_product' product_pk=product.pk %}" method="post" onsubmit="return confirm('Are you sure you want to delete this product?')">
+        {% csrf_token %}
+        <button>Delete Product</button>
+    </form>
     <hr>
     <a href="{% url 'store:products' %}">Back to Products</a>
 </body>
