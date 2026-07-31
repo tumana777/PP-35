@@ -8,6 +8,8 @@ class Category(models.Model):
 
     class Meta:
         db_table = 'categories'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
     def __str__(self):
         return self.name
@@ -24,6 +26,8 @@ class Product(models.Model):
 
     class Meta:
         db_table = 'products'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
 
     # def validate_price(self):
     #     if self.price <= 0:

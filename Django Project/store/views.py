@@ -21,7 +21,7 @@ def about(request):
     return render(request, 'about.html')
 
 def products(request):
-    all_products = Product.objects.all()
+    all_products = Product.objects.all().select_related('category')
     total = all_products.count()
 
     context = {
