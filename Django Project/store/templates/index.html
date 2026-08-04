@@ -4,5 +4,7 @@
 
 {% block content %}
     <h1>Hello World</h1>
-    {{ products }}
+    {% for product in object_list %}
+        <p>{{ product.name }}</p>
+    {% endfor %}
 {% endblock %}
