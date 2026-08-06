@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.http import JsonResponse
 from store.models import Product
@@ -99,11 +100,12 @@ class ProductDetailView(DetailView):
 #     return render(request, 'add_product.html', {'form': form})
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     template_name = 'add_product.html'
     form_class = AddProductForm
     success_url = reverse_lazy('store:products')
+    login_url = reverse_lazy('accounts:login')
 
     def form_valid(self, form):
         form.instance.quantity = 10

@@ -15,17 +15,29 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'store:about' %}">About Us</a>
             </li>
-              <li class="nav-item dropdown">
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
+                      {{ user.username }}
                   </a>
                   <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li>
+                          <form action="{% url 'accounts:logout' %}" method="post">
+                              {% csrf_token %}
+                              <button class="dropdown-item" type="submit">Logout</button>
+                           </form>
+                      </li>
                   </ul>
-              </li>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+                </li>
+            {% endif %}
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

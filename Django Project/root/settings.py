@@ -48,12 +48,15 @@ INSTALLED_APPS = [
 
     # local apps
     'store.apps.StoreConfig',
+    'accounts.apps.AccountsConfig',
 
     # 3rd party apps
     "crispy_forms",
     "crispy_bootstrap5",
     'debug_toolbar'
 ]
+
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -127,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'ka'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Tbilisi'
 
