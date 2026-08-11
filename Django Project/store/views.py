@@ -5,6 +5,7 @@ from store.models import Product
 from store.forms import AddProductForm
 from django.views.generic import TemplateView, View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 # def index(request):
 #     return HttpResponse("<h1>Hello, world!</h1>")
@@ -58,14 +59,36 @@ class ProductsListView(ListView):
     model = Product
     template_name = 'products.html'
     context_object_name = 'products'
-    queryset = Product.objects.all().select_related('category')
+    # queryset = Product.objects.all().select_related('category')
     # paginate_by = 4
+
+    def get_queryset(self):
+        products = Product.objects.all().select_related('category')
+
+        search_query = self.request.GET.get('q')
+
+        if search_query:
+            products = products.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
+
+        min_price = self.request.GET.get('min_price')
+
+        if min_price:
+            products = products.filter(price__gte=min_price)
+
+        max_price = self.request.GET.get('max_price')
+
+        if max_price:
+            products = products.filter(price__lte=max_price)
+
+        return products
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total'] = self.get_queryset().count()
-        print(context)
+        # print(context)
         return context
+
+
 
 # def product_detail(request, product_pk):
 #     product = get_object_or_404(Product, pk=product_pk)
