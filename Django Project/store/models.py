@@ -23,6 +23,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/', blank=True, null=True, default='default.jpeg')
 
     class Meta:
         db_table = 'products'

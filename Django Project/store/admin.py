@@ -33,14 +33,14 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('price', 'is_available')
     readonly_fields = ('created_at',)
 
-    fieldsets = (
-        ('Product Information', {
-            'fields': ('name', 'category', 'description')
-        }),
-        ('Price Information', {
-            'fields': ('price', 'quantity', 'is_available')
-        }),
-    )
+    # fieldsets = (
+    #     ('Product Information', {
+    #         'fields': ('name', 'category', 'description')
+    #     }),
+    #     ('Price Information', {
+    #         'fields': ('price', 'quantity', 'is_available')
+    #     }),
+    # )
 
     @admin.display(description='Total Price')
     def total_price(self, obj):

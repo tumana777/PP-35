@@ -106,7 +106,7 @@ class ProductDetailView(DetailView):
 
 #         # print(request.POST)
 
-#         form = AddProductForm(request.POST)
+#         form = AddProductForm(request.POST, request.FILES)
 
 #         if form.is_valid():
 #             form.save()
@@ -139,7 +139,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 #     product = get_object_or_404(Product, pk=product_pk)
 
 #     if request.method == 'POST':
-#         form = AddProductForm(request.POST, instance=product)
+#         form = AddProductForm(request.POST, request.FILES, instance=product)
 
 #         if form.is_valid():
 #             form.save()
