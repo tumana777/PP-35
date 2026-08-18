@@ -31,7 +31,9 @@
                             </div>
                         {% endfor %}
                     </div>
+                    {% include 'paginator.html' %}
                 </div>
+                
         </div>
     <a class="btn btn-primary" href="{% url 'store:add_product' %}">Add New Product</a>
 {% endblock %}

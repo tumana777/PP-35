@@ -6,6 +6,7 @@ from store.forms import AddProductForm
 from django.views.generic import TemplateView, View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # def index(request):
 #     return HttpResponse("<h1>Hello, world!</h1>")
@@ -60,7 +61,7 @@ class ProductsListView(ListView):
     template_name = 'products.html'
     context_object_name = 'products'
     # queryset = Product.objects.all().select_related('category')
-    # paginate_by = 4
+    paginate_by = 2
 
     def get_queryset(self):
         products = Product.objects.all().select_related('category')
