@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     # 3rd party apps
     "crispy_forms",
     "crispy_bootstrap5",
-    'debug_toolbar'
+    'debug_toolbar',
+    'rest_framework'
 ]
 
 # AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'middleware.logging_middleware.LoggingMiddleware',
-    'middleware.block_ip_middleware.BlockIpMiddleware',
+    # 'middleware.block_ip_middleware.BlockIpMiddleware',
 ]
 
 
