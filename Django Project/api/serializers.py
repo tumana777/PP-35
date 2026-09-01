@@ -28,6 +28,11 @@ class CategoryListSerializer(serializers.ModelSerializer):
         fields = ["id", "saxeli"]
 
 class ProductListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name']
+
+class ProductDetailSerializer(serializers.ModelSerializer):
 
     category = CategoryListSerializer()
     total_price = serializers.SerializerMethodField()
@@ -38,3 +43,13 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     def get_total_price(self, obj):
         return obj.price * obj.quantity
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        exclude = ['is_available']
+
+class ProductUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
