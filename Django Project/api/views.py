@@ -7,7 +7,11 @@ from api.serializers import (
 )
 from django.db.models import Count
 
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import (
+    ListAPIView, RetrieveAPIView, CreateAPIView,
+    UpdateAPIView, DestroyAPIView, ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView
+)
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from store.models import Product, Category
@@ -54,9 +58,24 @@ class ProductUpdateAPIView(UpdateAPIView):
 class ProductDeleteAPIView(DestroyAPIView):
     queryset = Product.objects.select_related('category')
 
+class ProductListCreateAPIView(ListCreateAPIView):
+    queryset = Product.objects.select_related('category')
+    serializer_class = ProductCreateSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ProductCreateSerializer
+        return ProductListSerializer
 
+class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.select_related('category')
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductDetailSerializer
+        return ProductUpdateSerializer
 
 
 
